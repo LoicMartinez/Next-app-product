@@ -1,5 +1,5 @@
 import Layout from "@/components/Layout";
-import {Suspense, useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import {productsApi} from "@/libs/types/api/productTypes";
 import Api from "src/libs/api/client"
 import {Button, Grid, Typography} from "@mui/material";

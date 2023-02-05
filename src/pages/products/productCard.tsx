@@ -14,7 +14,7 @@ export default function ProductCard(props: ProductCardInterface) {
             <Link href={'/products'}>
                 <Card sx={{height: 400, width: 400}}>
                     <Box sx={{height: 350, width: 400, position: 'relative'}}>
-                        <Image src={props?.product?.thumbnail ?? ''} alt={''} fill />
+                        <Image src={props.product?.thumbnail ?? ''} alt={''} fill />
                     </Box>
                     <Typography align="center">
                         {props.product?.title ?? ''}
