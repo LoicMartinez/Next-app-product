@@ -1,7 +1,7 @@
 import axios, {AxiosInstance} from "axios";
 import {setLocalStorage} from "@/libs/localStorage";
 import {authUser} from "@/libs/types/api/userTypes";
-import {productsApi} from "@/libs/types/api/productTypes";
+import {product, productsApi} from "@/libs/types/api/productTypes";
 
 class Client {
     readonly baseUrl: string
@@ -40,6 +40,12 @@ class Client {
         const response = await this.call.get(`products${params}`)
 
         return await response.data as productsApi
+    }
+
+    async GetProduct(productId: string): Promise<product> {
+        const response = await this.call.get(`products/${productId}`)
+
+        return await response.data as product
     }
 
 
