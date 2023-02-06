@@ -1,5 +1,4 @@
 import {Button, Grid, TextField} from "@mui/material";
-import Layout from "src/components/Layout";
 import Api from "src/libs/api/client"
 import {useState, ChangeEvent, Dispatch, SetStateAction} from "react";
 import {useStateType} from "@/libs/types/reactTypes";
@@ -7,8 +6,8 @@ import {onChangeType} from "@/libs/types/materialUiTypes";
 import { useRouter } from 'next/router';
 
 export default function LoginPage({}) {
-    const [login, setLogin] = useState('')
-    const [password, setPassword] = useState('')
+    const [login, setLogin] = useState('kminchelle')
+    const [password, setPassword] = useState('0lelplR')
     const [showError, setShowError] = useState(false)
 
     const router = useRouter();

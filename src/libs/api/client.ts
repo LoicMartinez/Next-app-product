@@ -1,7 +1,8 @@
 import axios, {AxiosInstance} from "axios";
 import {setLocalStorage} from "@/libs/localStorage";
-import {authUser} from "@/libs/types/api/userTypes";
+import {authUser, user} from "@/libs/types/api/userTypes";
 import {product, productsApi} from "@/libs/types/api/productTypes";
+import {setCookie} from "@/libs/cookies";
 
 class Client {
     readonly baseUrl: string
@@ -13,7 +14,7 @@ class Client {
         this.call = axios.create({
             baseURL: this.baseUrl,
             timeout: 1000,
-            headers: { 'Content-Type': 'application/json' },
+            // headers: { 'Content-Type': 'application/json' },
             // headers: {'X-Custom-Header': 'foobar'}
         });
     }
@@ -26,8 +27,8 @@ class Client {
             })
 
         const dataAuthUser: authUser = await response.data
-        setLocalStorage('token', dataAuthUser.token)
-
+        // setLocalStorage('token', dataAuthUser.token)
+        setCookie('token', dataAuthUser.token, 1)
         return dataAuthUser
     }
 
@@ -48,6 +49,11 @@ class Client {
         return await response.data as product
     }
 
+    async GetUser(userId: number) : Promise<user> {
+        const response = await this.call.get(`https://dummyjson.com/products/${userId}`)
+
+        return await response.data as user
+    }
 
 
 }
