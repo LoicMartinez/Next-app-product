@@ -11,8 +11,8 @@ type Data = {
 }
 
 export const ProductDetail: NextPage<product> = (product) => {
-    console.log(product)
-    return (<Layout>
+
+    return (<>
         <Typography align="center">
             product name : {product.title}
         </Typography>
@@ -22,7 +22,7 @@ export const ProductDetail: NextPage<product> = (product) => {
         <Box sx={{height: 350, width: 400, position: 'relative'}}>
             <Image src={product.thumbnail ?? ''} alt={''} fill />
         </Box>
-    </Layout>)
+    </>)
 }
 
 

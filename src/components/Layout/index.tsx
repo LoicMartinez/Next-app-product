@@ -1,43 +1,30 @@
 import * as React from 'react';
-import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import List from '@mui/material/List';
 import CssBaseline from '@mui/material/CssBaseline';
 import Typography from '@mui/material/Typography';
-import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
-import {AppBar, Drawer, DrawerHeader} from "./StyledComponents";
+import {AppBar, Drawer} from "./StyledComponents";
 import Head from "next/head";
 import SellIcon from '@mui/icons-material/Sell';
 import HomeIcon from '@mui/icons-material/Home';
 import Link from 'next/link';
+import { LinearProgress } from '@mui/material';
 
 export interface LayoutProps  {
     children: React.ReactNode,
     title?: string,
+    loading?: boolean,
 }
 
 export default function Layout(props: LayoutProps) {
-    const theme = useTheme();
     const [open, setOpen] = React.useState(false);
-
-    const handleDrawerOpen = () => {
-        setOpen(true);
-    };
-
-    const handleDrawerClose = () => {
-        setOpen(false);
-    };
 
     // @ts-ignore
     return (
@@ -63,18 +50,14 @@ export default function Layout(props: LayoutProps) {
                         >
                             <MenuIcon />
                         </IconButton>
-                        <Typography variant="h6" noWrap component="div">
+                        <Typography variant="h6" noWrap component="div" sx={{color: (theme) => theme.palette.text.secondary}}>
                             Mini variant drawer
                         </Typography>
                     </Toolbar>
                 </AppBar>
                 <Drawer variant="permanent" open={open}>
-                    <DrawerHeader>
-                        <IconButton onClick={handleDrawerClose}>
-                            {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
-                        </IconButton>
-                    </DrawerHeader>
-                    <Divider />
+                    <Toolbar />
+                    {/*<Divider />*/}
                     <List>
                         {[
                             {title: 'home', text: 'menu', icon: <HomeIcon/>, link: '/'},
@@ -105,9 +88,14 @@ export default function Layout(props: LayoutProps) {
                         ))}
                     </List>
                 </Drawer>
-                <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+                <Box component="main" sx={{ flexGrow: 1 }}>
                     <Toolbar />
-                    {props.children}
+                    <Box height={2}>
+                        {props.loading && <LinearProgress />}
+                    </Box>
+                    <Box sx={{p: 3}}>
+                        {props.children}
+                    </Box>
                 </Box>
             </Box>
         </>

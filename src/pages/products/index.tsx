@@ -22,15 +22,15 @@ export default function ProductsPage({}) {
     }, [page])
 
     return (
-        <Layout>
+        <>
+            <Button variant={"contained"} sx={{m: 1}} onClick={() => setPage(page - 1)} disabled={!products || page == 1}>
+                {'<'}
+            </Button>
+            <Button variant={"contained"} sx={{m: 1}} onClick={() => setPage(page + 1)} disabled={!products || ((products?.skip + limit) >= products?.total)}>
+                {'>'}
+            </Button>
             {products?
                 <>
-                    <Button variant={"contained"} sx={{m: 1}} onClick={() => setPage(page - 1)} disabled={page == 1}>
-                        {'<'}
-                    </Button>
-                    <Button variant={"contained"} sx={{m: 1}} onClick={() => setPage(page + 1)} disabled={!products || ((products?.skip + limit) >= products?.total)}>
-                        {'>'}
-                    </Button>
                     <Grid container spacing={2}>
                         {products.products.map(
                                 product => <ProductCard product={product} key={`productListItem${product.id}`}/>
@@ -39,7 +39,7 @@ export default function ProductsPage({}) {
                 </> : <Typography align="center"> Chargement... </Typography>
 
             }
-        </Layout>
+        </>
     )
 }
 
