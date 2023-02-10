@@ -9,6 +9,13 @@ import {useState} from "react";
 import Layout from '@/components/Layout';
 import { ThemeProvider, useTheme } from '@mui/material/styles';
 import { theme } from '@/libs/theme';
+import {QueryClient, QueryClientProvider } from 'react-query';
+import {ReactQueryDevtools} from "react-query/devtools";
+import * as React from "react";
+// import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+
+
+const queryClient = new QueryClient()
 
 export default function App({ Component, pageProps }: AppProps) {
   const [loading, setLoading] = useState(false);
@@ -22,10 +29,14 @@ export default function App({ Component, pageProps }: AppProps) {
   Router.events.on("routeChangeError", (url) => setLoading(false))
 
   return (
-      <ThemeProvider theme={theme}>
-        <Layout loading={loading}>
-          <Component {...pageProps} />
-        </Layout>
-      </ThemeProvider>
+    <ThemeProvider theme={theme}>
+        <QueryClientProvider client={queryClient}>
+
+            <Layout loading={loading}>
+                <Component {...pageProps} />
+            </Layout>
+            <ReactQueryDevtools initialIsOpen={false} />
+        </QueryClientProvider>
+    </ThemeProvider>
   )
 }

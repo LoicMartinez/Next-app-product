@@ -28,6 +28,9 @@ export default function LoginPage({}) {
         const response = await Api.Authenticate(login, password)
 
         if (response.token)
+            if (router.asPath !== '/')
+                router.reload()
+
             await router.push('/')
 
     }

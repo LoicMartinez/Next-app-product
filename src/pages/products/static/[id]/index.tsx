@@ -1,5 +1,5 @@
 import { product } from "@/libs/types/api/productTypes";
-import { GetServerSideProps, NextPage } from "next";
+import { GetServerSideProps, GetStaticPaths, GetStaticProps, NextPage } from "next";
 import Api from "src/libs/api/client"
 import {Box, Typography} from "@mui/material";
 import Image from 'next/image'
@@ -20,12 +20,31 @@ export const ProductDetail: NextPage<product> = (product) => {
 }
 
 
-export const getServerSideProps: GetServerSideProps = async context=> {
-    const product = await Api.GetProduct(context.query.id as string)
+export const getStaticProps:GetStaticProps = async (context) => {
+    const product = await Api.GetProduct(context?.params?.id as string)
 
     return {
         props: product
     }
+}
+
+
+export const getStaticPaths: GetStaticPaths = async () => {
+    const products = await Api.GetProducts()
+
+    const paths = products.products.map((product) => {
+        return {
+            params: {
+                id: product.id.toString()
+            }
+        }
+    })
+
+    return {
+        paths,
+        fallback: false, // can also be true or 'blocking'
+    }
+
 }
 
 export default ProductDetail
