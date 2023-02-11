@@ -4,6 +4,9 @@ import {useState, ChangeEvent, Dispatch, SetStateAction} from "react";
 import {useStateType} from "@/libs/types/reactTypes";
 import {onChangeType} from "@/libs/types/materialUiTypes";
 import { useRouter } from 'next/router';
+import {useDispatch} from "react-redux";
+import {addUser} from "@/libs/redux/user/userSlice";
+import {useAppDispatch} from "@/libs/redux/store";
 
 export default function LoginPage({}) {
     const [login, setLogin] = useState('kminchelle')
@@ -11,6 +14,7 @@ export default function LoginPage({}) {
     const [showError, setShowError] = useState(false)
 
     const router = useRouter();
+    const dispatch = useAppDispatch();
 
     const handleFieldUpdate = (event: onChangeType, setter: useStateType) => {
         setter(event.target.value)
@@ -28,8 +32,9 @@ export default function LoginPage({}) {
         const response = await Api.Authenticate(login, password)
 
         if (response.token)
+            dispatch(addUser(response))
             if (router.asPath !== '/')
-                router.reload()
+                router.reload();
 
             await router.push('/')
 

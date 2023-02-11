@@ -29,6 +29,7 @@ class Client {
         const dataAuthUser: authUser = await response.data
         // setLocalStorage('token', dataAuthUser.token)
         setCookie('token', dataAuthUser.token, 1)
+        setLocalStorage('user', JSON.stringify(dataAuthUser))
         return dataAuthUser
     }
 

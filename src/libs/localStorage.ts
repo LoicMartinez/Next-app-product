@@ -1,12 +1,12 @@
 function getLocalStorage(key: string) {
-    if (window == undefined)
+    if (typeof window === undefined)
         return ''
 
     return window.localStorage.getItem(key);
 }
 
 function setLocalStorage(key: string, value: string) {
-    if (window == undefined)
+    if (typeof window === undefined)
         return ''
 
     if (key && value) {
@@ -18,7 +18,7 @@ function setLocalStorage(key: string, value: string) {
 }
 
 function delLocalStorage(key: string) {
-    if (window == undefined)
+    if (typeof window === undefined)
         return ''
 
     window.localStorage.removeItem(key);

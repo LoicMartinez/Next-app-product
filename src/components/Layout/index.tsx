@@ -15,7 +15,11 @@ import Head from "next/head";
 import SellIcon from '@mui/icons-material/Sell';
 import HomeIcon from '@mui/icons-material/Home';
 import Link from 'next/link';
-import { LinearProgress } from '@mui/material';
+import {Grid, LinearProgress } from '@mui/material';
+import {useSelector} from "react-redux";
+import {RootState, useAppDispatch} from "@/libs/redux/store";
+import {getLocalStorage} from "@/libs/localStorage";
+import {addUser} from "@/libs/redux/user/userSlice";
 
 export interface LayoutProps  {
     children: React.ReactNode,
@@ -26,7 +30,10 @@ export interface LayoutProps  {
 export default function Layout(props: LayoutProps) {
     const [open, setOpen] = React.useState(false);
 
-    // @ts-ignore
+    const { user } = useSelector((state: RootState) => state.user)
+
+    console.log(user)
+
     return (
         <>
             <Head>
@@ -48,12 +55,14 @@ export default function Layout(props: LayoutProps) {
                                 marginRight: 5,
                             }}
                         >
-                            <MenuIcon />
+                        <MenuIcon />
                         </IconButton>
                         <Typography variant="h6" noWrap component="div" sx={{color: (theme) => theme.palette.text.secondary}}>
                             Mini variant drawer
                         </Typography>
                     </Toolbar>
+                    {props.loading && <LinearProgress />}
+
                 </AppBar>
                 <Drawer variant="permanent" open={open}>
                     <Toolbar />
@@ -90,9 +99,6 @@ export default function Layout(props: LayoutProps) {
                 </Drawer>
                 <Box component="main" sx={{ flexGrow: 1 }}>
                     <Toolbar />
-                    <Box height={2}>
-                        {props.loading && <LinearProgress />}
-                    </Box>
                     <Box sx={{p: 3}}>
                         {props.children}
                     </Box>
