@@ -1,6 +1,4 @@
-import Layout from "@/components/Layout";
-import {useEffect, useState} from "react";
-import {productsApi} from "@/libs/types/api/productTypes";
+import {useState} from "react";
 import Api from "src/libs/api/client"
 import {Button, Grid, Typography} from "@mui/material";
 import ProductCard from "@/pages/products/productCard";

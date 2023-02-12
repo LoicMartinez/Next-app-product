@@ -15,11 +15,11 @@ import Head from "next/head";
 import SellIcon from '@mui/icons-material/Sell';
 import HomeIcon from '@mui/icons-material/Home';
 import Link from 'next/link';
-import {Grid, LinearProgress } from '@mui/material';
+import {LinearProgress } from '@mui/material';
 import {useSelector} from "react-redux";
-import {RootState, useAppDispatch} from "@/libs/redux/store";
-import {getLocalStorage} from "@/libs/localStorage";
-import {addUser} from "@/libs/redux/user/userSlice";
+import {selectLocation} from "@/libs/redux/navBar/useSlice";
+import {useRouter} from "next/router";
+import {useEffect} from "react";
 
 export interface LayoutProps  {
     children: React.ReactNode,
@@ -29,10 +29,13 @@ export interface LayoutProps  {
 
 export default function Layout(props: LayoutProps) {
     const [open, setOpen] = React.useState(false);
+    const router = useRouter();
 
-    const { user } = useSelector((state: RootState) => state.user)
+    const { location } = useSelector(selectLocation)
+    useEffect(() => {
+        console.log(location)
+    }, [location])
 
-    console.log(user)
 
     return (
         <>
@@ -66,14 +69,17 @@ export default function Layout(props: LayoutProps) {
                 </AppBar>
                 <Drawer variant="permanent" open={open}>
                     <Toolbar />
-                    {/*<Divider />*/}
                     <List>
                         {[
                             {title: 'home', text: 'menu', icon: <HomeIcon/>, link: '/'},
                             {title: 'products', text: 'liste des produits', icon: <SellIcon/>, link: '/products'}
                         ].map((item) => (
-                            <Link href={item.link} key={`listItemElement${item.title}`}>
-                                <ListItem key={'home_side_bar'} disablePadding sx={{ display: 'block' }}>
+                            <Link
+                                href={item.link}
+                                key={`listItemElement${item.title}`}
+                                // className={item.link === router.pathname ? 'sg-question-title' : 'listItemNotSelected'}
+                            >
+                                <ListItem  key={'home_side_bar'} disablePadding sx={{ display: 'block' }}>
                                     <ListItemButton
                                         sx={{
                                             minHeight: 48,

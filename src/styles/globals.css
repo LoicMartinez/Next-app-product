@@ -1,3 +1,6 @@
+.listItemSelected {color: chocolate; background: aquamarine}
+.listItemNotSelected {color: darkgreen; background: darkmagenta}
+
 /*:root {*/
 /*  --max-width: 1100px;*/
 /*  --border-radius: 12px;*/

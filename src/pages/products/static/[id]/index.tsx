@@ -1,5 +1,5 @@
 import { product } from "@/libs/types/api/productTypes";
-import { GetServerSideProps, GetStaticPaths, GetStaticProps, NextPage } from "next";
+import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import Api from "src/libs/api/client"
 import {Box, Typography} from "@mui/material";
 import Image from 'next/image'

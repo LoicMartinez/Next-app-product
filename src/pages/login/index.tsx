@@ -1,12 +1,12 @@
 import {Button, Grid, TextField} from "@mui/material";
 import Api from "src/libs/api/client"
-import {useState, ChangeEvent, Dispatch, SetStateAction} from "react";
+import {useState} from "react";
 import {useStateType} from "@/libs/types/reactTypes";
 import {onChangeType} from "@/libs/types/materialUiTypes";
 import { useRouter } from 'next/router';
 import {useDispatch} from "react-redux";
 import {addUser} from "@/libs/redux/user/userSlice";
-import {useAppDispatch} from "@/libs/redux/store";
+import {setLocation} from "@/libs/redux/navBar/useSlice";
 
 export default function LoginPage({}) {
     const [login, setLogin] = useState('kminchelle')
@@ -14,7 +14,8 @@ export default function LoginPage({}) {
     const [showError, setShowError] = useState(false)
 
     const router = useRouter();
-    const dispatch = useAppDispatch();
+    const dispatch = useDispatch();
+    dispatch(setLocation(router.pathname))
 
     const handleFieldUpdate = (event: onChangeType, setter: useStateType) => {
         setter(event.target.value)

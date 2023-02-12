@@ -1,5 +1,6 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {authUser} from "@/libs/types/api/userTypes";
+import {RootState} from "@/libs/redux/store";
 
 interface UserState {
     user:authUser | null
@@ -25,3 +26,5 @@ export const userSlice = createSlice({
 export const { addUser, removeUser } = userSlice.actions
 
 export default userSlice.reducer
+
+export const selectUser = (state: RootState) => state.user
