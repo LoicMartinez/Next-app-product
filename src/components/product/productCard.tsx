@@ -2,7 +2,6 @@ import {Box, Card, Grid, Typography} from "@mui/material";
 import Image from 'next/image'
 import {product} from "@/libs/types/api/productTypes";
 import Link from "next/link";
-import PlaceHolderProductCard from "@/components/product/placeHolderProductCard";
 
 interface ProductCardInterface {
     product: product,

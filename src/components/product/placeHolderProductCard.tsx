@@ -1,4 +1,4 @@
-import {Box, Card, Grid, Skeleton, Typography} from "@mui/material";
+import {Box, Card, Grid, Skeleton} from "@mui/material";
 
 
 export default function PlaceHolderProductCard() {
